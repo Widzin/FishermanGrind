@@ -81,11 +81,6 @@ public class FloatController : MonoBehaviour {
 				speed = -1.7f;
 			else
 				speed = -0.5f;
-
-			/*if (speed <= 0)
-				speed = 0.2f;
-			else
-				speed = -0.8f;*/
 		}
 		else if (Input.GetKey("right"))
 		{
@@ -93,11 +88,6 @@ public class FloatController : MonoBehaviour {
 				speed = 0.5f;
 			else
 				speed = 1.7f;
-
-			/*if (speed <= 0)
-				speed = -0.8f;
-			else
-				speed = 0.2f;*/
 		}
 		else
 		{
@@ -105,11 +95,6 @@ public class FloatController : MonoBehaviour {
 				speed = -1f;
 			else
 				speed = 1f;
-
-			/*if (speed <= 0)
-				speed = -0.5f;
-			else
-				speed = 0.5f;*/
 		}
 	}
 
