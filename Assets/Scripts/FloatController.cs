@@ -9,7 +9,8 @@ public class FloatController : MonoBehaviour {
 	public float speed;
 	//rigidbody2d of float
 	private Rigidbody2D rb2d;
-
+	//step
+	private float step;
 
 	//texts fields for showing damage done to objects
 	public Text lineDamageText;
@@ -50,6 +51,7 @@ public class FloatController : MonoBehaviour {
 		lineDamage = 0f;
 		fullTime = 0f;
 		interval = 2f;
+		step = 0.1f;
 	}
 
 	// Update is called once per frame
@@ -64,8 +66,10 @@ public class FloatController : MonoBehaviour {
 	//Function controlling moving the hook
 	private void MoveFloat()
 	{
-		float moveHorizontal = Input.GetAxis("Horizontal");
-		Vector2 movement = new Vector2(moveHorizontal, transform.position.y);
+		//float moveHorizontal = Input.GetAxis("Horizontal");
+		//Vector2 movement = new Vector2(moveHorizontal, transform.position.y);
+
+		Vector2 movement = new Vector2(transform.position.x + step, transform.position.y);
 		rb2d.AddForce(movement * speed);
 	}
 
@@ -80,6 +84,7 @@ public class FloatController : MonoBehaviour {
 		if (interval < fullTime)
 		{
 			fishPull = !fishPull;
+			speed = (-1) * speed;
 			fullTime = 0f;
 			interval = Random.Range(minRange, maxRange);
 		}
