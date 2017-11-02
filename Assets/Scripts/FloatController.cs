@@ -72,6 +72,7 @@ public class FloatController : MonoBehaviour {
 		rb2d.velocity = new Vector2(speed, 0);
 	}
 
+	//Function to check hold keys and setting from them speed and direction 
 	private void CheckInputKeys()
 	{
 		if (Input.GetKey("left"))
