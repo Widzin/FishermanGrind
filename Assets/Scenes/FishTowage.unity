@@ -169,7 +169,7 @@ SpriteRenderer:
   m_SortingLayerID: -1655718281
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300014, guid: f31818d33e5a35146a0bbf063afe9a57, type: 3}
+  m_Sprite: {fileID: 21300026, guid: f31818d33e5a35146a0bbf063afe9a57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -386,7 +386,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.22, y: 0.64}
+    oldSize: {x: 0.32, y: 0.64}
     newSize: {x: 0.22, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -611,7 +611,7 @@ SpriteRenderer:
   m_SortingLayerID: -1655718281
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300016, guid: f31818d33e5a35146a0bbf063afe9a57, type: 3}
+  m_Sprite: {fileID: 21300028, guid: f31818d33e5a35146a0bbf063afe9a57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -631,7 +631,7 @@ GameObject:
   - component: {fileID: 553374723}
   - component: {fileID: 553374724}
   m_Layer: 0
-  m_Name: Red-Blue Ending
+  m_Name: Blue-Right Ending
   m_TagString: BadBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -682,12 +682,12 @@ SpriteRenderer:
   m_SortingLayerID: -1655718281
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300010, guid: f31818d33e5a35146a0bbf063afe9a57, type: 3}
+  m_Sprite: {fileID: 21300024, guid: f31818d33e5a35146a0bbf063afe9a57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.64, y: 0.32}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1392,7 +1392,7 @@ GameObject:
   - component: {fileID: 2090803095}
   - component: {fileID: 2090803096}
   m_Layer: 0
-  m_Name: RedBlueEnding
+  m_Name: Red-Left Ending
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1443,12 +1443,12 @@ SpriteRenderer:
   m_SortingLayerID: -1655718281
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300010, guid: f31818d33e5a35146a0bbf063afe9a57, type: 3}
+  m_Sprite: {fileID: 21300022, guid: f31818d33e5a35146a0bbf063afe9a57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.64, y: 0.32}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
