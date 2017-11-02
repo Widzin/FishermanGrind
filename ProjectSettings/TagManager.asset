@@ -52,3 +52,6 @@ TagManager:
   - name: Pointer
     uniqueID: 3441872019
     locked: 0
+  - name: Fisherman
+    uniqueID: 354977401
+    locked: 0
