@@ -481,13 +481,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ccdc99a6ee8b541bbb13efad57c5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: -1
   lineDamageText: {fileID: 1835972474}
   fishDamageText: {fileID: 1880475266}
   damageSize: 0.3
   valueText: {fileID: 1180827562}
   minRange: 2
-  maxRange: 2.5
+  maxRange: 2
   tempText: {fileID: 1913000948}
 --- !u!1001 &441807371
 Prefab:

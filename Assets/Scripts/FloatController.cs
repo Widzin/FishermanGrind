@@ -50,7 +50,7 @@ public class FloatController : MonoBehaviour {
 		fishDamage = 0f;
 		lineDamage = 0f;
 		fullTime = 0f;
-		interval = 2f;
+		interval = minRange;
 		step = 0.1f;
 	}
 
@@ -63,14 +63,53 @@ public class FloatController : MonoBehaviour {
 		ChangeFlag();
 	}
 
+	private Vector2 temp;
+
 	//Function controlling moving the hook
 	private void MoveFloat()
 	{
-		//float moveHorizontal = Input.GetAxis("Horizontal");
-		//Vector2 movement = new Vector2(moveHorizontal, transform.position.y);
+		CheckInputKeys();
+		rb2d.velocity = new Vector2(speed, 0);
+	}
 
-		Vector2 movement = new Vector2(transform.position.x + step, transform.position.y);
-		rb2d.AddForce(movement * speed);
+	private void CheckInputKeys()
+	{
+		if (Input.GetKey("left"))
+		{
+			if (fishPull)
+				speed = -1.7f;
+			else
+				speed = -0.5f;
+
+			/*if (speed <= 0)
+				speed = 0.2f;
+			else
+				speed = -0.8f;*/
+		}
+		else if (Input.GetKey("right"))
+		{
+			if (fishPull)
+				speed = 0.5f;
+			else
+				speed = 1.7f;
+
+			/*if (speed <= 0)
+				speed = -0.8f;
+			else
+				speed = 0.2f;*/
+		}
+		else
+		{
+			if (fishPull)
+				speed = -1f;
+			else
+				speed = 1f;
+
+			/*if (speed <= 0)
+				speed = -0.5f;
+			else
+				speed = 0.5f;*/
+		}
 	}
 
 	//Function calculating and changing the time, that fish is making sth for specific period
@@ -85,6 +124,7 @@ public class FloatController : MonoBehaviour {
 		{
 			fishPull = !fishPull;
 			speed = (-1) * speed;
+			//step = (-1) * step;
 			fullTime = 0f;
 			interval = Random.Range(minRange, maxRange);
 		}
