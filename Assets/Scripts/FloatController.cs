@@ -9,15 +9,23 @@ public class FloatController : MonoBehaviour {
 	public float speed;
 	//rigidbody2d of float
 	private Rigidbody2D rb2d;
-	//step
-	private float step;
+
 
 	//texts fields for showing damage done to objects
 	public Text lineDamageText;
 	public Text fishDamageText;
-	//value of damage done to objects
+	//values of objects life at beggining
+	public float fishLife;
+	public float hookLife;
+	//values of actual objects life
+	private float actualFishLife;
+	private float actualHookLife;
+	//healthbars of objects
+	public GameObject fishHealthBar;
+	public GameObject hookHealthBar;
+	//values of damage done to objects
 	private float fishDamage;
-	private float lineDamage;
+	private float hookDamage;
 	//damage size by every frame
 	public float damageSize;
 
@@ -48,10 +56,9 @@ public class FloatController : MonoBehaviour {
 		fishPull = true;
 		rb2d = GetComponent<Rigidbody2D>();
 		fishDamage = 0f;
-		lineDamage = 0f;
+		hookDamage = 0f;
 		fullTime = 0f;
 		interval = minRange;
-		step = 0.1f;
 	}
 
 	// Update is called once per frame
@@ -61,6 +68,7 @@ public class FloatController : MonoBehaviour {
 		ShowFishEvent();
 		CalculateAndPrintDamage();
 		ChangeFlag();
+		ChangeHealthBarLengths();
 	}
 
 	private Vector2 temp;
@@ -110,7 +118,6 @@ public class FloatController : MonoBehaviour {
 		{
 			fishPull = !fishPull;
 			speed = (-1) * speed;
-			//step = (-1) * step;
 			fullTime = 0f;
 			interval = Random.Range(minRange, maxRange);
 		}
@@ -138,11 +145,14 @@ public class FloatController : MonoBehaviour {
 		}
 		else
 		{
-			lineDamage += damageSize * Time.deltaTime;
+			hookDamage += damageSize * Time.deltaTime;
 		}
 
-		fishDamageText.text = "Damage done to fish:\n" + fishDamage.ToString();
-		lineDamageText.text = "Damage done to hook:\n" + lineDamage.ToString();
+		actualFishLife = 100f - Mathf.Round((fishDamage / fishLife) * 100);
+		fishDamageText.text = actualFishLife.ToString() + " %";
+
+		actualHookLife = 100f - Mathf.Round((hookDamage / hookLife) * 100);
+		lineDamageText.text = actualHookLife.ToString() + " %";
 	}
 
 	//Functions checking if float is in good position
@@ -168,4 +178,14 @@ public class FloatController : MonoBehaviour {
 			goodPosition = true;
 		}
 	}
+
+	private void ChangeHealthBarLengths()
+	{
+		Vector2 fishScale = new Vector2(actualFishLife / 100, 1f);
+		fishHealthBar.transform.localScale = fishScale;
+
+		Vector2 hookScale = new Vector2(actualHookLife / 100, 1f);
+		hookHealthBar.transform.localScale = hookScale;
+	}
+
 }
