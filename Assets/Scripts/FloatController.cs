@@ -5,6 +5,13 @@ using UnityEngine.UI;
 
 public class FloatController : MonoBehaviour {
 
+	//text field for showing countdown
+	public Text countDownText;
+	//value of countdown length
+	public int waitTime;
+	//variable needed to count, how much time passed in countdown
+	private float counter;
+
 	//movement of float
 	public float speed;
 	//rigidbody2d of float
@@ -12,7 +19,7 @@ public class FloatController : MonoBehaviour {
 
 
 	//texts fields for showing damage done to objects
-	public Text lineDamageText;
+	public Text hookDamageText;
 	public Text fishDamageText;
 	//values of objects life at beggining
 	public float fishLife;
@@ -46,16 +53,18 @@ public class FloatController : MonoBehaviour {
 	//time passed from last flag change
 	private float fullTime;
 
-	//variable bool of checking if game is ended
-	private bool gameNotEnd;
-
 	//variable bool of showing if float is in good position
 	private bool goodPosition;
+
+	//variable bool of checking if game is ended
+	private bool play;
 
 	// Use this for initialization
 	void Start()
 	{
-		gameNotEnd = true;
+		play = false;
+		countDownText.fontSize = 144;
+		counter = 0f;
 		fishPull = true;
 		rb2d = GetComponent<Rigidbody2D>();
 		fishDamage = 0f;
@@ -67,19 +76,51 @@ public class FloatController : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		if (gameNotEnd)
+		if (!play)
+		{
+			CountDown();
+		}
+		else
 		{
 			MoveFloat();
 			ShowFishEvent();
 			CalculateAndPrintDamage();
 			ChangeFlag();
 			ChangeHealthBarLengths();
-		}
 
-		CheckIfEndOfGame();
+			CheckIfEndOfGame();
+		}
 	}
 
-	private Vector2 temp;
+	//function to showing countdown at the beggining of the game
+	private void CountDown()
+	{
+		ResetTextFields();
+		countDownText.text = waitTime.ToString();
+		countDownText.fontSize -= 3;
+		counter += Time.deltaTime;
+
+		if (counter >= 1f)
+		{
+			waitTime--;
+			counter = 0f;
+			countDownText.fontSize = 144;
+		}
+		if (waitTime == 0)
+		{
+			play = true;
+			countDownText.text = "";
+		}	
+	}
+
+	//function to reset text fields at the beggining of the game
+	private void ResetTextFields()
+	{
+		valueText.text = "";
+		eventText.text = "";
+		fishDamageText.text = "100 %";
+		hookDamageText.text = "100 %";
+	}
 
 	//Function controlling moving the hook
 	private void MoveFloat()
@@ -160,7 +201,7 @@ public class FloatController : MonoBehaviour {
 		fishDamageText.text = actualFishLife.ToString() + " %";
 
 		actualHookLife = 100f - Mathf.Round((hookDamage / hookLife) * 100);
-		lineDamageText.text = actualHookLife.ToString() + " %";
+		hookDamageText.text = actualHookLife.ToString() + " %";
 	}
 
 	//Functions checking if float is in good position
@@ -187,6 +228,7 @@ public class FloatController : MonoBehaviour {
 		}
 	}
 
+	//function to controll healthbars
 	private void ChangeHealthBarLengths()
 	{
 		Vector2 fishScale = new Vector2(actualFishLife / 100, 1f);
@@ -196,11 +238,12 @@ public class FloatController : MonoBehaviour {
 		hookHealthBar.transform.localScale = hookScale;
 	}
 
+	//function checking end of minigame
 	private void CheckIfEndOfGame()
 	{
 		if (actualHookLife == 0 || actualFishLife == 0)
 		{
-			gameNotEnd = false;
+			play = false;
 			rb2d.velocity = new Vector2(0, 0);
 			//speed = 0;
 			//damageSize = 0;
