@@ -40,12 +40,14 @@ public class FloatController : MonoBehaviour {
 
 
 	//text field for showing value of flag
-	public Text tempText;
+	public Text eventText;
 	//variable bool for event of fish
 	private bool fishPull;
 	//time passed from last flag change
 	private float fullTime;
 
+	//variable bool of checking if game is ended
+	private bool gameNotEnd;
 
 	//variable bool of showing if float is in good position
 	private bool goodPosition;
@@ -53,6 +55,7 @@ public class FloatController : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
+		gameNotEnd = true;
 		fishPull = true;
 		rb2d = GetComponent<Rigidbody2D>();
 		fishDamage = 0f;
@@ -64,11 +67,16 @@ public class FloatController : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		MoveFloat();
-		ShowFishEvent();
-		CalculateAndPrintDamage();
-		ChangeFlag();
-		ChangeHealthBarLengths();
+		if (gameNotEnd)
+		{
+			MoveFloat();
+			ShowFishEvent();
+			CalculateAndPrintDamage();
+			ChangeFlag();
+			ChangeHealthBarLengths();
+		}
+
+		CheckIfEndOfGame();
 	}
 
 	private Vector2 temp;
@@ -128,11 +136,11 @@ public class FloatController : MonoBehaviour {
 	{
 		if (fishPull)
 		{
-			tempText.text = "Fish is pulling";
+			eventText.text = "Fish is pulling";
 		}
 		else
 		{
-			tempText.text = "Fish is not moving";
+			eventText.text = "Fish is not moving";
 		}
 	}
 
@@ -186,6 +194,21 @@ public class FloatController : MonoBehaviour {
 
 		Vector2 hookScale = new Vector2(actualHookLife / 100, 1f);
 		hookHealthBar.transform.localScale = hookScale;
+	}
+
+	private void CheckIfEndOfGame()
+	{
+		if (actualHookLife == 0 || actualFishLife == 0)
+		{
+			gameNotEnd = false;
+			rb2d.velocity = new Vector2(0, 0);
+			//speed = 0;
+			//damageSize = 0;
+			if (actualFishLife == 0)
+				eventText.text = "You win!";
+			if (actualHookLife == 0)
+				eventText.text = "You lost!";
+		}
 	}
 
 }
