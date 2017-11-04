@@ -56,15 +56,21 @@ public class FloatController : MonoBehaviour {
 	//variable bool of showing if float is in good position
 	private bool goodPosition;
 
-	//variable bool of checking if game is ended
+	//variable bool of checking if countDown has started
 	private bool play;
+	//variable bool of checking if game is ended
+	private bool endOfGame;
 
 	// Use this for initialization
 	void Start()
 	{
+		endOfGame = false;
 		play = false;
 		countDownText.fontSize = 144;
 		counter = 0f;
+
+		actualFishLife = 100f;
+		actualHookLife = 100f;
 		fishPull = true;
 		rb2d = GetComponent<Rigidbody2D>();
 		fishDamage = 0f;
@@ -76,20 +82,23 @@ public class FloatController : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		if (!play)
+		if (!endOfGame)
 		{
-			CountDown();
-		}
-		else
-		{
-			MoveFloat();
-			ShowFishEvent();
-			CalculateAndPrintDamage();
-			ChangeFlag();
-			ChangeHealthBarLengths();
+			if (!play)
+			{
+				CountDown();
+			}
+			else
+			{
+				MoveFloat();
+				ShowFishEvent();
+				CalculateAndPrintDamage();
+				ChangeFlag();
+				ChangeHealthBarLengths();
+			}
 
 			CheckIfEndOfGame();
-		}
+		}			
 	}
 
 	//function to showing countdown at the beggining of the game
@@ -243,15 +252,25 @@ public class FloatController : MonoBehaviour {
 	{
 		if (actualHookLife == 0 || actualFishLife == 0)
 		{
-			play = false;
+			endOfGame = true;
 			rb2d.velocity = new Vector2(0, 0);
-			//speed = 0;
-			//damageSize = 0;
 			if (actualFishLife == 0)
-				eventText.text = "You win!";
+			{
+				ShowEndTexts("win");
+			}
 			if (actualHookLife == 0)
-				eventText.text = "You lost!";
+			{
+				ShowEndTexts("lost");
+			}
 		}
 	}
 
+	//function to show texts at the end of game
+	private void ShowEndTexts (string text)
+	{
+		valueText.text = "";
+		eventText.text = "";
+		countDownText.text = "You " + text + "!";
+		countDownText.fontSize = 144;
+	}
 }
