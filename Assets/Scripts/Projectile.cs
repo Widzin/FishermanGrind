@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour {
 
     private void MoveBall()
     {
-        float distance = Vector2.Distance(hook.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float distance = Vector2.Distance(hook.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
         if (distance < maxTension)
         {
             rb.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0); ;
